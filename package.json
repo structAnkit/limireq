@@ -1,7 +1,7 @@
 {
   "name": "limireq"
   ,"description": "Limireq is a Node.js module that throttles the number of concurrent active requests at a given time. This is useful when batch processing API data without overloading smaller servers and/or the client itself."
-  ,"version": "0.1.0"
+  ,"version": "0.1.1"
   ,"author": {
     "name": "Ankit Aggarwal"
     ,"email": "ankitaggarwal@gmail.com"
@@ -33,5 +33,5 @@
   ,"scripts": {
     "test": "node tests/run.js"
   }
-  ,"_id": "limireq@0.1.0"
+  ,"_id": "limireq@0.1.1"
 }
