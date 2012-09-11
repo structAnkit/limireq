@@ -1,0 +1,38 @@
+{
+  "name": "limireq"
+  ,"description": "Http(s) connection throttler that limits the number of concurrent active requests at a given time"
+  ,"version": "1.0"
+  ,"author": {
+    "name": "Ankit Aggarwal"
+    ,"email": "ankitaggarwal@gmail.com"
+    ,"twitter": "structAnkit"
+  }
+  ,"contributors": [
+    {
+      "name": "Ankit Aggarwal"
+      ,"email": ""
+    }
+  ]
+  ,"dependencies": {
+    "request": "2.9.x"
+  }
+  ,"keywords": [
+    "request"
+    ,"limiter"
+    ,"throttle"
+    ,"http"
+  ]
+  ,"repository": {
+    "type": "git"
+    ,"url": "https://github.com/structAnkit/limireq.git"
+  }
+  ,"main": "index"
+  ,"engines": [
+    "node >= 0.6.0"
+  ]
+  ,"scripts": {
+    "test": "node tests/run.js"
+  }
+  ,"_id": "limireq@1.0"
+  ,"fromt": "limireq"
+}
