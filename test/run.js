@@ -6,7 +6,7 @@
 
     'use strict';
 
-    var Limireq = require('limireq')
+    var Limireq = require('../index')
         ,lr
         ,start
         ,timeOneQueue
@@ -66,7 +66,7 @@
                 console.log('Google: Totally not a tech company, they don\'t make self-driving cars or anything')
             })
             .push('http://www.android.com', function(err, res, body) {
-                console.log('Android: Almost all of my OEMs suck...just like with Windows computers')
+                console.log('Android: Almost all OEMs suck...just like with Windows computers')
             })
             .push('http://www.youtube.com', function(err, res, body) {
                 console.log('YouTube: Read the comments!')
@@ -75,10 +75,10 @@
                 console.log('Amazon: Buy things cheap...plus tax and shipping and waiting')
             })
             .push('http://www.apple.com', function(err, res, body) {
-                console.log('Apple: Pay 3x the price of a used car for your computers')
+                console.log('Apple: Pay 3x the price of a used car for our computers')
             })
             .push('http://www.bing.com', function(err, res, body) {
-                console.log('Bing: This is only here because the name sounds funny')
+                console.log('Bing: This is only here because the name is funny')
             })
             .start()
             .on('end', function() {
