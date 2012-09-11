@@ -9,8 +9,8 @@
     var Limireq = require('../index')
         ,lr
         ,start
-        ,timeOneQueue
-        ,timeThreeQueues
+        ,timeOneEventQueue
+        ,timeThreeCallbackQueues
 
     /**
      * Single serially executed queue
@@ -19,8 +19,13 @@
      *
      * This test utilizes the Request options object parameter format and events
      */
-    (function oneEventQueue() {
-        console.log('***Begin single queue, event-based test')
+    function oneEventQueue() {
+        console.log('\n***Begin single queue, event-based test\n')
+
+        function onData(err, res, body) {
+            console.log('Status Code: ' + res.statusCode)
+            console.log('Do some common processing with the response')
+        }
 
         start = new Date()
         lr = new Limireq(1)
@@ -28,24 +33,20 @@
             .push({ url: 'http://www.android.com' }, function (err, res, body) {
                 console.log('Status Code:' + res.statusCode)
                 console.log('Bypass the data event for Android.com')
-                console.log()
             })
             .push({ url: 'http://www.youtube.com' })
             .push({ url: 'http://www.amazon.com' })
             .push({ url: 'http://www.apple.com' })
             .push({ url: 'http://www.bing.com' })
-            .on('data', function(err, res, body) {
-                console.log('Status Code: ' + res.statusCode)
-                console.log('Do some common processing with the response')
-                console.log()
-            })
+            .on('data', onData)
             .on('end', function end() {
-                timeOneQueue = new Date()-start
+                timeOneEventQueue = new Date()-start
+                threeCallbackQueues()
+                lr.removeListener('data', onData)
                 lr.removeListener('end', end)
-                threeQueues()
             })
             .start()
-    }())
+    }
 
     /**
      * Three serially executed queues
@@ -57,8 +58,13 @@
      *
      * This test utilizes String urls and callbacks
      */
-    function threeQueues() {
-        console.log('***Begin three parallel queues, callback-based test')
+    function threeCallbackQueues() {
+        console.log('\n***Begin three parallel queues, callback-based test\n')
+
+        function onData(err, res, body) {
+            console.log('Status Code: ' + res.statusCode)
+            console.log('Not important enough to have its own callback')
+        }
 
         start = new Date()
         lr.init(3)
@@ -77,17 +83,21 @@
             .push('http://www.apple.com', function(err, res, body) {
                 console.log('Apple: Pay 3x the price of a used car for our computers')
             })
-            .push('http://www.bing.com', function(err, res, body) {
-                console.log('Bing: This is only here because the name is funny')
-            })
+            .push('http://www.bing.com')
+            .on('data', onData)
             .start()
-            .on('end', function() {
-                timeThreeQueues = new Date()-start
+            .on('end', function end() {
+                timeThreeCallbackQueues = new Date()-start
                 console.log('Test completion times:')
-                console.log('Single queue: ' + timeOneQueue)
-                console.log('Three queues: ' + timeThreeQueues)
+                console.log('Single queue: ' + timeOneEventQueue)
+                console.log('Three queues: ' + timeThreeCallbackQueues)
+                lr.removeListener('data', onData);
+                lr.removeListener('end', end);
             })
 
     }
+
+	// Begin tests
+	oneEventQueue()
 
 }())
