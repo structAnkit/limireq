@@ -44,16 +44,17 @@ The responses and their body text will be emitted via the 'data' event:
 
 ```js
 lr.on('data', function(err, res, body) {
-    // You can use the 'data' event as an alternative to callbacks
     try {
         var json = JSON.parse(console.log(body))
         doStuffToJsonInputFunction(json)
     } catch (e) {
+        console.log(e)
     }
 })
 ```
 
 When all responses have been emitted, the throttle will emit an 'end' event and enable reuse of the limiter:
+
 ```js
 lr.on('end', function() {
     console.log('We finished')
@@ -63,8 +64,8 @@ lr.on('end', function() {
 # Callbacks
 
 If a specific request's response needs to be handled differently from the others, you can pass a callback function when you push the request to the pool. This means you will NOT receive a 'data' event for this request:
-```js
 
+```js
 function callback(err, res, body) {
     // Do stuff
 }
