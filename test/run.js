@@ -22,11 +22,6 @@
     function oneEventQueue() {
         console.log('\n***Begin single queue, event-based test\n')
 
-        function onData(err, res, body) {
-            console.log('Status Code: ' + res.statusCode)
-            console.log('Do some common processing with the response')
-        }
-
         start = new Date()
         lr = new Limireq(1)
             .push({ url: 'http://www.google.com' })
@@ -38,12 +33,13 @@
             .push({ url: 'http://www.amazon.com' })
             .push({ url: 'http://www.apple.com' })
             .push({ url: 'http://www.bing.com' })
-            .on('data', onData)
-            .on('end', function end() {
+            .on('data', function(err, res, body) {
+                console.log('Status Code: ' + res.statusCode)
+                console.log('Do some common processing with the response')
+            })
+            .on('end', function() {
                 timeOneEventQueue = new Date()-start
                 threeCallbackQueues()
-                lr.removeListener('data', onData)
-                lr.removeListener('end', end)
             })
             .start()
     }
@@ -60,11 +56,6 @@
      */
     function threeCallbackQueues() {
         console.log('\n***Begin three parallel queues, callback-based test\n')
-
-        function onData(err, res, body) {
-            console.log('Status Code: ' + res.statusCode)
-            console.log('Not important enough to have its own callback')
-        }
 
         start = new Date()
         lr.init(3)
@@ -84,17 +75,17 @@
                 console.log('Apple: Pay 3x the price of a used car for our computers')
             })
             .push('http://www.bing.com')
-            .on('data', onData)
-            .start()
-            .on('end', function end() {
+            .on('data', function(err, res, body) {
+                console.log('Status Code: ' + res.statusCode)
+                console.log('Not important enough to have its own callback')
+            })
+            .on('end', function() {
                 timeThreeCallbackQueues = new Date()-start
                 console.log('Test completion times:')
                 console.log('Single queue: ' + timeOneEventQueue)
                 console.log('Three queues: ' + timeThreeCallbackQueues)
-                lr.removeListener('data', onData);
-                lr.removeListener('end', end);
             })
-
+            .start()
     }
 
 	// Begin tests
