@@ -1,37 +1,37 @@
 {
-  "name": "limireq"
-  ,"description": "Limireq is a Node.js module that throttles the number of concurrent active requests at a given time. This is useful when batch processing API data without overloading smaller servers and/or the client itself."
-  ,"version": "0.1.1"
-  ,"author": {
-    "name": "Ankit Aggarwal"
-    ,"email": "ankitaggarwal@gmail.com"
-    ,"twitter": "structAnkit"
-  }
-  ,"contributors": [
+  "name": "limireq",
+  "description": "Limireq is a Node.js module that throttles the number of concurrent active requests at a given time. This is useful when batch processing API data without overloading smaller servers and/or the client itself.",
+  "version": "0.1.1",
+  "author": {
+    "name": "Ankit Aggarwal",
+    "email": "ankitaggarwal@gmail.com",
+    "twitter": "structAnkit"
+  },
+  "contributors": [
     {
-      "name": "Ankit Aggarwal"
-      ,"email": "ankitaggarwal@gmail.com"
+      "name": "Ankit Aggarwal",
+      "email": "ankitaggarwal@gmail.com"
     }
-  ]
-  ,"dependencies": {
+  ],
+  "dependencies": {
     "request": "2.9.x"
-  }
-  ,"keywords": [
-    "request"
-    ,"limiter"
-    ,"throttle"
-    ,"http"
-  ]
-  ,"repository": {
-    "type": "git"
-    ,"url": "https://github.com/structAnkit/limireq.git"
-  }
-  ,"main": "index"
-  ,"engines": [
+  },
+  "keywords": [
+    "request",
+    "limiter",
+    "throttle",
+    "http"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/structAnkit/limireq.git"
+  },
+  "main": "index",
+  "engines": [
     "node = 0.8.x"
-  ]
-  ,"scripts": {
+  ],
+  "scripts": {
     "test": "node tests/run.js"
-  }
-  ,"_id": "limireq@0.1.1"
+  },
+  "_id": "limireq@0.1.2"
 }
