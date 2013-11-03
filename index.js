@@ -97,20 +97,21 @@ Limireq.prototype.start = function() {
 
 // Don't expose this function to the public prototype
 function next() {
-  var conn = this.connections.shift()
+  var limireq = this;
+  var conn = limireq.connections.shift()
   if (!conn) return
 
   request(conn.options, function(err, res, body) {
     if (typeof conn.callback === 'function')
       conn.callback(err, res, body)
     else
-      this.emit('data', err, res, body)
+      limireq.emit('data', err, res, body)
 
     // Signal the end of processing
-    if (++this.completed === this.total) {
-      this.active = false
-      this.emit('end')
-    } else next.call(this)
+    if (++limireq.completed === limireq.total) {
+      limireq.active = false
+      limireq.emit('end')
+    } else next.call(limireq)
   })
 }
 
